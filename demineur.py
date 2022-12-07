@@ -1,6 +1,7 @@
 """
 Auteur: Alexandre Tulkens
 Date: 06-12-2022
+<<<<<<< HEAD
                             Info-F-106 Projet 1 - Démineur
 ce jeux est un jeux à 1 joueur sur une grille de taille variable et dont certaines cases contiennent des mines. Le
 but du jeu est de dévoiler petit-à-petit les cases vides de la grille jusqu’à localiser toutes les mines
@@ -35,5 +36,5 @@ def main():
 #                                                #
 ##################################################
 
-if __name__ == "__main__":  # Permet a la fonction main de ce faire importer sans anomalies
+if __name__ == "__main__":  # Permet d'importer la fonctions dans d'autres fichiers sans anomalies
     main()

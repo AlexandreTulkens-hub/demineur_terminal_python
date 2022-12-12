@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e56ecae9-e98c-4d03-b8d3-f3133fa33604" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/démineur.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="e56ecae9-e98c-4d03-b8d3-f3133fa33604" name="Changes" comment="solutioner un merge conflict avec mon remote branch">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demineur.py" beforeDir="false" afterPath="$PROJECT_DIR$/demineur.py" afterDir="false" />
     </list>
@@ -70,6 +67,18 @@
       <option name="presentableId" value="Default" />
       <updated>1670334137616</updated>
     </task>
+    <task id="LOCAL-00001" summary="solutioner un merge conflict avec mon remote branch">
+      <created>1670381071022</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1670381071022</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="solutioner un merge conflict avec mon remote branch" />
+    <option name="LAST_COMMIT_MESSAGE" value="solutioner un merge conflict avec mon remote branch" />
   </component>
 </project>

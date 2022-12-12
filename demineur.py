@@ -31,7 +31,8 @@ def create_board(n: int, m: int):
                     m (int): nombre de case en largeur du tableau
 
             Return:
-                    board (list): tableau initialisé par fonction
+                    board (list): list de list de chaîne de charactère
+                                  correspondant aux tableau de jeux
     """
     board = [['.' for x in range(n)] for y in range(m)]  # utilisation de compréhension de liste
     return board
@@ -42,13 +43,13 @@ def print_board(board: list):
     Fonction qui affiche le plateau de jeu
     
             Parameters:
-                    board (list): tableau contenant le tableau de jeux
+                    board (list): list de list de chaîne de charactère
+                                  correspondant aux tableau de jeux
 
             Return:
                     None
     """
-    long_tab = len(board)  # Largeur du tableau
-    larg_tab = len(board[0])  # Longueur du tableau
+    larg_tab, long_tab = get_size(board)  # donne le nombre de colonnes et de lignes
 
     # Affiche l'indice des colones du plateau
     print("   ", end="")
@@ -78,6 +79,58 @@ def print_board(board: list):
         print("_" * (larg_tab - 10), end="")
     print("_" * (larg_tab * 2 + 2))
 
+
+def get_size(board: list):
+    """
+    Fonction qui renvoie les dimensions du plateau donné en entrée.
+
+            Parameters:
+                    board (list): list de list de chaîne de charactère
+                                  correspondant aux tableau de jeux
+
+            Return:
+                    (n, m) (tuple): un tuple de deux entiers correspondant aux dimensions du plateau
+    """
+    # recherche la longueur et la largeur du tableau pour avoir les dimensions
+    n = len(board[0])
+    m = len(board)
+    return n, m
+
+
+def get_neighbors(board: list, pos_x: int, pos_y: int):
+    """
+    Fonction qui renvoie les dimensions du plateau donné en entrée.
+
+            Parameters:
+                    board (list): list de list de chaîne de charactère
+                                  correspondant aux tableau de jeux
+
+            Return:
+                    neighbors (list): list de tuples de deux entiers correspondant aux positions des
+                                      cases adjacentes
+    """
+    i = k = -1  # i détermine les voisins de haut et k de gauche
+    j = l = 2  # j détermine les voisins de bas et l de droite
+
+    nb_col, nb_li = get_size(board)  # donne le nombre de colonnes et de lignes du tableau
+
+    #  Instruction qui détermine quelles cases n'éxistent pas
+    if pos_y == 0:
+        i = 0
+    if pos_y == nb_li - 1:
+        j = 1
+    if pos_x == 0:
+        k = 0
+    if pos_x == nb_col - 1:
+        l = 1
+
+    neighbors = []  # list des coördonnées de toutes les cases voisines
+    for change_pos_y in range(i, j):  # Itération a travers les lignes du tableau
+        for change_pos_x in range(k, l):  # Itération a travers les colonnes du tableau
+            if not(change_pos_x == 0 and change_pos_y == 0):  # If pour ne pas comptabiliser case de départ comme voisin
+                neighbors.append((pos_x + change_pos_x, pos_y + change_pos_y))  # Ajout a la liste des voisins
+
+
 def main():
     """
     Fonction qui démarre l'éxécution du jeux
@@ -85,7 +138,7 @@ def main():
     """
     x = create_board(LONG, LARG)
     print_board(x)
-
+    neighbors = get_neighbors(x, 0, 6)
 
 ##################################################
 #                                                #

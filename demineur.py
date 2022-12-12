@@ -8,6 +8,7 @@ et les “désamorcer”. Le joueur perd s’il dévoile une case contenant une 
 """
 #import
 import sys
+import random
 
 #constantes
 LONG = int(sys.argv[1])  # nombre de cases en longueur du plateau
@@ -104,6 +105,8 @@ def get_neighbors(board: list, pos_x: int, pos_y: int):
             Parameters:
                     board (list): list de list de chaîne de charactère
                                   correspondant aux tableau de jeux
+                    pos_x (int): coordonnée x de la case dont la fonction calcule les voisins
+                    pos_y (int): coordonnée y de la case dont la fonction calcule les voisins
 
             Return:
                     neighbors (list): list de tuples de deux entiers correspondant aux positions des
@@ -112,7 +115,7 @@ def get_neighbors(board: list, pos_x: int, pos_y: int):
     i = k = -1  # i détermine les voisins de haut et k de gauche
     j = l = 2  # j détermine les voisins de bas et l de droite
 
-    nb_col, nb_li = get_size(board)  # donne le nombre de colonnes et de lignes du tableau
+    nb_col, nb_li = get_size(board)  # Donne le nombre de colonnes et de lignes du tableau
 
     #  Instruction qui détermine quelles cases n'éxistent pas
     if pos_y == 0:
@@ -124,12 +127,73 @@ def get_neighbors(board: list, pos_x: int, pos_y: int):
     if pos_x == nb_col - 1:
         l = 1
 
-    neighbors = []  # list des coördonnées de toutes les cases voisines
+    neighbors = []  # Liste des coordonnées de toutes les cases voisines
     for change_pos_y in range(i, j):  # Itération a travers les lignes du tableau
         for change_pos_x in range(k, l):  # Itération a travers les colonnes du tableau
             if not(change_pos_x == 0 and change_pos_y == 0):  # If pour ne pas comptabiliser case de départ comme voisin
                 neighbors.append((pos_x + change_pos_x, pos_y + change_pos_y))  # Ajout a la liste des voisins
 
+    return neighbors
+
+def place_mines(reference_board: list, number_of_mines: int, first_pos_x: int, first_pos_y: int):
+    """
+    Fonction qui place aléatoire les mines sur le reference_board après que le joueur
+    ait choisi une première case à dévoiler
+
+            Parameters:
+                    reference_board (list): list de list de chaîne de charactère
+                                  correspondant au tableau de jeux de référence
+                    number_of_mines (int): nombre de mines à placer sur le tableau
+                    first_pos_x (int): coordonnée x de la case choisie comme case de départ par le joueur
+                    first_pos_y (int): coordonnée y de la case choisie comme case de départ par le joueur
+
+            Return:
+                    pos_mines (list): list de tuples de deux entiers correspondant aux positions des
+                                    mines sur le plateau de jeux
+    """
+    nb_col, nb_li = get_size(reference_board)  # Donne le nombre de colonnes et de lignes du tableau
+    pos_mines = []  # Liste contenant les positions des mines
+    pos_interdites = get_neighbors(reference_board, first_pos_x, first_pos_y)  # Liste de cases ou mines ne peuvent être
+    pos_interdites.append((first_pos_x, first_pos_y))  # La liste doit aussi contenire la première case dévoilé
+
+    for _ in range(number_of_mines):  # Creation de chaque mine une par une
+        pos_x_mines = random.randint(0, nb_col - 1)
+        pos_y_mines = random.randint(0, nb_li - 1)
+        while (pos_x_mines, pos_y_mines) in pos_interdites:  # Permet de ne pas avoir de mines avec pos interdites
+            pos_x_mines = random.randint(0, nb_col - 1)
+            pos_y_mines = random.randint(0, nb_li - 1)
+        reference_board[pos_y_mines][pos_x_mines] = "X"  # Ajoute la mine dans le tableau de référence
+        pos_interdites.append((pos_x_mines, pos_y_mines))  # Après avoir posé une mine sur une case la case est interdites pour la prochaîne
+        pos_mines.append((pos_x_mines, pos_y_mines))  # Ajout de la postion de la mine dans la liste contenant ces pos
+
+    return pos_mines
+
+
+def fill_in_board(reference_board: list):
+    """
+    Fonction qui calcule le nombre de mines présentes dans le voisinage de chaque case et
+    modifie ensuite le plateau de référence pour y faire apparaître ces nombres.
+
+            Parameters:
+                    reference_board (list): list de list de chaîne de charactère
+                                  correspondant au tableau de jeux de référence
+
+            Return:
+                    None
+    """
+    nb_col, nb_li = get_size(reference_board)  # Donne le nombre de colonnes et de lignes du tableau
+    for pos_y in range(nb_li):  # Itération a travers les lignes du tableau
+        for pos_x in range(nb_col):  # Itération a travers les colonnes du tableau
+            if reference_board[pos_y][pos_x] != "X":  # vérifie si il y a déjà une mine sur la case
+                neighbors = get_neighbors(reference_board, pos_x, pos_y)  # positions du voisinage
+                nb_neighbors = len(neighbors)  # Nombre de voisin a la case
+                nb_mines = 0  # Nombre de mines dans le voisinage d'une case
+                for index in range(nb_neighbors):
+                    if reference_board[neighbors[index][1]][neighbors[index][0]] == "X":  # check si case contient une mine
+                        nb_mines += 1
+                reference_board[pos_y][pos_x] = f"{nb_mines}"  # change la case en y métant le nombre de mines voisines
+
+    return None
 
 def main():
     """
@@ -138,7 +202,10 @@ def main():
     """
     x = create_board(LONG, LARG)
     print_board(x)
-    neighbors = get_neighbors(x, 0, 6)
+    pos_mines = place_mines(x, NB_MINES, 6, 5)
+    fill_in_board(x)
+    print_board(x)
+
 
 ##################################################
 #                                                #

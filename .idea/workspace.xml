@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e56ecae9-e98c-4d03-b8d3-f3133fa33604" name="Changes" comment="modification des docstrings contenant des paramètre et returns avec des listes&#10;mise en place de la fonction qui récupère les dimensions du tableau de jeux&#10;mise en place de la fonction qui récupère le nombre de cases voisines">
+    <list default="true" id="e56ecae9-e98c-4d03-b8d3-f3133fa33604" name="Changes" comment="ajout du return a la fonction get_neighbors&#10;mise en place de la fonction place_mines: qui place les mines dans le tableau de référence&#10;mise en place de la fonction fill_in_board: qui calcule le nombre de mines dans le voisinage d'une case et qui remplie le tableau de référence avec ces nombres">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demineur.py" beforeDir="false" afterPath="$PROJECT_DIR$/demineur.py" afterDir="false" />
     </list>
@@ -88,13 +88,21 @@
       <option name="project" value="LOCAL" />
       <updated>1670866228634</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ajout du return a la fonction get_neighbors&#10;mise en place de la fonction place_mines: qui place les mines dans le tableau de référence&#10;mise en place de la fonction fill_in_board: qui calcule le nombre de mines dans le voisinage d'une case et qui remplie le tableau de référence avec ces nombres">
+      <created>1670880846094</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670880846094</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="solutioner un merge conflict avec mon remote branch" />
     <MESSAGE value="mise en place de la fonction create_board qui initialise le tableau de jeux&#10;mise en place de la fonction print_board qui imprime le tableau de jeux pour un tableau d'indice plus petit que 11" />
     <MESSAGE value="modification des docstrings contenant des paramètre et returns avec des listes&#10;mise en place de la fonction qui récupère les dimensions du tableau de jeux&#10;mise en place de la fonction qui récupère le nombre de cases voisines" />
-    <option name="LAST_COMMIT_MESSAGE" value="modification des docstrings contenant des paramètre et returns avec des listes&#10;mise en place de la fonction qui récupère les dimensions du tableau de jeux&#10;mise en place de la fonction qui récupère le nombre de cases voisines" />
+    <MESSAGE value="ajout du return a la fonction get_neighbors&#10;mise en place de la fonction place_mines: qui place les mines dans le tableau de référence&#10;mise en place de la fonction fill_in_board: qui calcule le nombre de mines dans le voisinage d'une case et qui remplie le tableau de référence avec ces nombres" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout du return a la fonction get_neighbors&#10;mise en place de la fonction place_mines: qui place les mines dans le tableau de référence&#10;mise en place de la fonction fill_in_board: qui calcule le nombre de mines dans le voisinage d'une case et qui remplie le tableau de référence avec ces nombres" />
   </component>
 </project>

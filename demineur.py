@@ -24,16 +24,16 @@ NB_MINES = int(sys.argv[3])  # nombre de mines dans le plateau
 
 def create_board(n: int, m: int):
     """
-    Fontion qui initialise un tableau de taille n × m où chaque case contient le caractère correspondant
-    à une case inexporée
+    Fonction qui initialise un tableau de taille n × m où chaque case contient le caractère correspondant
+    à une case inexplorée
 
             Parameters:
-                    n (int): nombre de case en longueur du tableau
-                    m (int): nombre de case en largeur du tableau
+                    n (int): nombre de cases en longueur du tableau
+                    m (int): nombre de cases en largeur du tableau
 
             Return:
-                    board (list): list de list de chaîne de charactère
-                                  correspondant aux tableau de jeux
+                    board (list): list de list de chaîne de caractères
+                                  correspondant au tableau de jeux
     """
     board = [['.' for x in range(n)] for y in range(m)]  # utilisation de compréhension de liste
     return board
@@ -44,8 +44,8 @@ def print_board(board: list):
     Fonction qui affiche le plateau de jeu
     
             Parameters:
-                    board (list): list de list de chaîne de charactère
-                                  correspondant aux tableau de jeux
+                    board (list): list de list de chaîne de caractères
+                                  correspondant au tableau de jeux
 
             Return:
                     None
@@ -86,25 +86,25 @@ def get_size(board: list):
     Fonction qui renvoie les dimensions du plateau donné en entrée.
 
             Parameters:
-                    board (list): list de list de chaîne de charactère
-                                  correspondant aux tableau de jeux
+                    board (list): list de list de chaîne de caractères
+                                  correspondant au tableau de jeux
 
             Return:
                     (n, m) (tuple): un tuple de deux entiers correspondant aux dimensions du plateau
     """
-    # recherche la longueur et la largeur du tableau pour avoir les dimensions
-    n = len(board[0])
-    m = len(board)
+    # la fonction len permet d'avoir le nombre d'éléments dans une liste qui ici représente
+    n = len(board[0])  # ça largeur/ le nombre de colonnes
+    m = len(board)  # ça longueur/ le nombre de lignes
     return n, m
 
 
 def get_neighbors(board: list, pos_x: int, pos_y: int):
     """
-    Fonction qui renvoie les dimensions du plateau donné en entrée.
+    Fonction qui calcule les coordonnées de tous les voisins de la case donnée et en renvoie une liste
 
             Parameters:
-                    board (list): list de list de chaîne de charactère
-                                  correspondant aux tableau de jeux
+                    board (list): list de list de chaîne de caractères
+                                  correspondant au tableau de jeux
                     pos_x (int): coordonnée x de la case dont la fonction calcule les voisins
                     pos_y (int): coordonnée y de la case dont la fonction calcule les voisins
 
@@ -112,12 +112,12 @@ def get_neighbors(board: list, pos_x: int, pos_y: int):
                     neighbors (list): list de tuples de deux entiers correspondant aux positions des
                                       cases adjacentes
     """
-    i = k = -1  # i détermine les voisins de haut et k de gauche
-    j = l = 2  # j détermine les voisins de bas et l de droite
+    i = k = -1  # i cert à calculer les voisins de haut et k ceux de gauche
+    j = l = 2  # j cert à calculer les voisins de bas et l ceux de droite
 
-    nb_col, nb_li = get_size(board)  # Donne le nombre de colonnes et de lignes du tableau
+    nb_col, nb_li = get_size(board)  # le nombre de colonnes et de lignes du tableau
 
-    #  Instruction qui détermine quelles cases n'éxistent pas
+    #  Instruction qui détermine quelles lignes et colonnes ont de façon sûre pas de voisins
     if pos_y == 0:
         i = 0
     if pos_y == nb_li - 1:
@@ -128,12 +128,14 @@ def get_neighbors(board: list, pos_x: int, pos_y: int):
         l = 1
 
     neighbors = []  # Liste des coordonnées de toutes les cases voisines
-    for change_pos_y in range(i, j):  # Itération a travers les lignes du tableau
-        for change_pos_x in range(k, l):  # Itération a travers les colonnes du tableau
-            if not(change_pos_x == 0 and change_pos_y == 0):  # If pour ne pas comptabiliser case de départ comme voisin
-                neighbors.append((pos_x + change_pos_x, pos_y + change_pos_y))  # Ajout a la liste des voisins
+    for change_pos_y in range(i, j):  # Change de ligne pour calculer la position y des voisins
+        for change_pos_x in range(k, l):  # Change de colonne pour calculer la position x des voisins
+            if not(change_pos_x == 0 and change_pos_y == 0):  # évite d'ajouter ça propre case comme un voisin
+                neighbors.append((pos_x + change_pos_x, pos_y + change_pos_y))  # Ajout a la liste la position calculer
+                # d'un voisin
 
     return neighbors
+
 
 def place_mines(reference_board: list, number_of_mines: int, first_pos_x: int, first_pos_y: int):
     """
@@ -141,30 +143,33 @@ def place_mines(reference_board: list, number_of_mines: int, first_pos_x: int, f
     ait choisi une première case à dévoiler
 
             Parameters:
-                    reference_board (list): list de list de chaîne de charactère
+                    reference_board (list): liste de liste de chaîne de caractères
                                   correspondant au tableau de jeux de référence
                     number_of_mines (int): nombre de mines à placer sur le tableau
                     first_pos_x (int): coordonnée x de la case choisie comme case de départ par le joueur
                     first_pos_y (int): coordonnée y de la case choisie comme case de départ par le joueur
 
             Return:
-                    pos_mines (list): list de tuples de deux entiers correspondant aux positions des
+                    pos_mines (list): liste de tuples de deux entiers correspondant aux positions des
                                     mines sur le plateau de jeux
     """
     nb_col, nb_li = get_size(reference_board)  # Donne le nombre de colonnes et de lignes du tableau
     pos_mines = []  # Liste contenant les positions des mines
     pos_interdites = get_neighbors(reference_board, first_pos_x, first_pos_y)  # Liste de cases ou mines ne peuvent être
-    pos_interdites.append((first_pos_x, first_pos_y))  # La liste doit aussi contenire la première case dévoilé
+
+    pos_interdites.append((first_pos_x, first_pos_y))  # Ajout de la première case dévoilé
 
     for _ in range(number_of_mines):  # Creation de chaque mine une par une
         pos_x_mines = random.randint(0, nb_col - 1)
         pos_y_mines = random.randint(0, nb_li - 1)
-        while (pos_x_mines, pos_y_mines) in pos_interdites:  # Permet de ne pas avoir de mines avec pos interdites
+        while (pos_x_mines, pos_y_mines) in pos_interdites:  # Vérification de la pos pour ne pas avoir de pos déjà
+            # employee
             pos_x_mines = random.randint(0, nb_col - 1)
             pos_y_mines = random.randint(0, nb_li - 1)
-        reference_board[pos_y_mines][pos_x_mines] = "X"  # Ajoute la mine dans le tableau de référence
-        pos_interdites.append((pos_x_mines, pos_y_mines))  # Après avoir posé une mine sur une case la case est interdites pour la prochaîne
-        pos_mines.append((pos_x_mines, pos_y_mines))  # Ajout de la postion de la mine dans la liste contenant ces pos
+
+        reference_board[pos_y_mines][pos_x_mines] = "X"  # Ajout de la mine dans le tableau de référence
+        pos_interdites.append((pos_x_mines, pos_y_mines))  # Rendre cette pos ensuite interdite
+        pos_mines.append((pos_x_mines, pos_y_mines))  # Et l'ajouter dans la liste contenant la pos de chaque mine
 
     return pos_mines
 
@@ -175,29 +180,64 @@ def fill_in_board(reference_board: list):
     modifie ensuite le plateau de référence pour y faire apparaître ces nombres.
 
             Parameters:
-                    reference_board (list): list de list de chaîne de charactère
+                    reference_board (list): list de list de chaîne de ccaractères
                                   correspondant au tableau de jeux de référence
 
             Return:
                     None
     """
     nb_col, nb_li = get_size(reference_board)  # Donne le nombre de colonnes et de lignes du tableau
-    for pos_y in range(nb_li):  # Itération a travers les lignes du tableau
-        for pos_x in range(nb_col):  # Itération a travers les colonnes du tableau
-            if reference_board[pos_y][pos_x] != "X":  # vérifie si il y a déjà une mine sur la case
-                neighbors = get_neighbors(reference_board, pos_x, pos_y)  # positions du voisinage
-                nb_neighbors = len(neighbors)  # Nombre de voisin a la case
-                nb_mines = 0  # Nombre de mines dans le voisinage d'une case
-                for index in range(nb_neighbors):
-                    if reference_board[neighbors[index][1]][neighbors[index][0]] == "X":  # check si case contient une mine
-                        nb_mines += 1
-                reference_board[pos_y][pos_x] = f"{nb_mines}"  # change la case en y métant le nombre de mines voisines
+
+    # Pour chaque case du tableau
+    for pos_y in range(nb_li):
+        for pos_x in range(nb_col):
+            if reference_board[pos_y][pos_x] != "X":  # Vérifie si la case ne contient pas de mine
+                nb_mines = 0  # Remise à zéro des mines dans le voisinage
+                neighbors = get_neighbors(reference_board, pos_x, pos_y)  # Calcule de toutes les positions du voisinage
+                nb_neighbors = len(neighbors)
+                for index in range(nb_neighbors):  # Pour chaque voisin
+                    npos_x = neighbors[index][0]
+                    npos_y = neighbors[index][1]
+                    if reference_board[npos_y][npos_x] == "X":  # check si case contient une mine
+                        nb_mines += 1  # Ajout au nombre de mines dans le voisinage
+                reference_board[pos_y][pos_x] = f"{nb_mines}"  # change la case en y mettant le nombre de mines voisines
 
     return None
 
+
+def propagate_click(game_board: list, reference_board: list, pos_x: int, pos_y: int):
+    """
+    Fonction qui met à jour le plateau de jeu en dévoilant d’un coup toutes les cases adjacentes à la case dévoilée
+    après un clic, lorsque celles-ci n’ont aucune mine dans leur voisinage
+
+            Parameters:
+                    game_board (list):  list de list de chaîne de caractères correspondant au tableau de jeux
+                    reference_board (list): list de list de chaîne de caractères correspondant
+                                            au tableau de jeux de référence
+                    pos_x (int): coordonnée x de la case dont la fonction calcule les voisins
+                    pos_y (int): coordonnée y de la case dont la fonction calcule les voisins
+
+            Return:
+                    None
+    """
+    if reference_board[pos_y][pos_x] != game_board[pos_y][pos_x]:  # Check si récursivité est déjà passée par cette case
+        if reference_board[pos_y][pos_x] == "0":  # Si la case n'a pas de mines dans son voisinage
+            game_board[pos_y][pos_x] = reference_board[pos_y][pos_x]  # La case prend la valeur du plateau de ref.
+            neighbors = get_neighbors(reference_board, pos_x, pos_y)  # Toutes les positions du voisinage sont calculés
+            nb_neighbors = len(neighbors)
+            for index in range(nb_neighbors):  # Pour chaque voisin
+                npos_x = neighbors[index][0]
+                npos_y = neighbors[index][1]
+                propagate_click(game_board, reference_board, npos_x, npos_y)  # On relance le processus
+        else:  # si la case a au moins une mine dans son voisinage
+            game_board[pos_y][pos_x] = reference_board[pos_y][pos_x]  # On affiche ce nombre sur la case
+    return None
+
+
+
 def main():
     """
-    Fonction qui démarre l'éxécution du jeux
+    Fonction qui démarre l'éxécution du jeu
     :return: None
     """
     x = create_board(LONG, LARG)

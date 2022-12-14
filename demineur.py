@@ -234,7 +234,64 @@ def propagate_click(game_board: list, reference_board: list, pos_x: int, pos_y: 
     return None
 
 
+def parse_input(n: int, m: int):
+    """
+    Fonction qui permet au joueur de rentrer une chaîne de caractères et qui sera ensuite
+    interprété et découpé en un tuple [action, pos_x, pos_y]
 
+            Parameters:
+                    n (int): nombre de cases en longueur du tableau
+                    m (int): nombre de cases en largeur du tableau
+
+            Return:
+                    action (tuple): tuple de str et int contenant l'action du joueur sur la case choisie
+    """
+    # Demande au joueur l'action qu'il veut faire
+    ch_de_car = input("Donner moi l'action que vous voulez faire suivit de la case (ex :f 0 4) :")
+    action = ch_de_car.split(" ")  # transformer la réponse en liste de str
+    for i in range(1, 3):  # transformer les éléments(str) contenant les coordonnées en int
+        action[i] = int(action[i])
+    action = tuple(action)  # transformer le tout en tuple
+
+    return action
+
+
+def check_win(game_board: list, reference_board: list, mines_list: list, total_flags: int):
+    """
+    Fonction qui vérifie si la condition de victoire est remplie
+
+            Parameters:
+                    game_board (list):  list de list de chaîne de caractères correspondant au tableau de jeux
+                    reference_board (list): list de list de chaîne de caractères correspondant
+                                            au tableau de jeux de référence
+                    mines_list (list): liste de tuples de deux entiers correspondant aux positions des mines
+                                        sur le plateau de jeux
+                    total_flags (int): nombre de drapeaux dans le tableau de jeu
+
+            Return:
+                    game_status (bool): booléen qui est True quand la partie est gagnée, False sinon
+    """
+    game_status = True  # On part du fait que la condition de victoire est remplie
+
+    nb_mines = len(mines_list)
+    if total_flags == nb_mines:  # S'il y a autant de mines que de drapeaux
+        for mine in mines_list:  # Mais que pour chaque mine
+            if game_board[mine[1]][mine[0]] != "F":  # Il y en a au moins une qui ne contient pas de drapeau
+                game_status = False  # La condition de victoire n'est pas remplie
+    else:
+        case_inconnue = 0  # Nombre de cases non dévoilées
+        for lignes in game_board:  # Pour chaque ligne,
+            for colonne in lignes:  # Chaque case
+                if colonne == "." or colonne == "F":  # Si non dévoilée
+                    case_inconnue += 1  # On l'ajoute au nombre de cases non dévoilées
+
+        if case_inconnue == nb_mines:  # S'il y a autant de mines que de cases non dévoilées
+            for mine in mines_list:  # Mais que pour chaque mine
+                if game_board[mine[1]][mine[0]] != ".":  # Il y en a au moins une qui ne l'est pas
+                    game_status = False  # La condition de victoire n'est pas remplie
+
+
+def init_game(n :int, m: int, number_of_mines: int):
 def main():
     """
     Fonction qui démarre l'éxécution du jeu

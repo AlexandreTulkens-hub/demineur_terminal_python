@@ -352,7 +352,7 @@ def main():
     permet au joueur de rentrer chaque nouvelle action afin de faire avancer le jeu
 
             Parameters:
-                    void
+                    none
 
             Return:
                     ress (int): gives if game won or lost

@@ -1,6 +1,8 @@
 """
-Auteur: Alexandre Tulkens
+Nom: Alexandre
+Prénom: Tulkens
 Matricule: 000575251
+Séction: B1-info-23
 Date: 06-12-2022
                             Info-F-106 Projet 1 - Démineur
 ce jeux est un jeux à 1 joueur sur une grille de taille variable et dont certaines cases contiennent des mines. Le

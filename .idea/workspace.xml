@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e56ecae9-e98c-4d03-b8d3-f3133fa33604" name="Changes" comment="ajout et finition de la fonction parse_input&#10;ajout et finition de la fonction check_win">
+    <list default="true" id="e56ecae9-e98c-4d03-b8d3-f3133fa33604" name="Changes" comment="jeu fini totalement:&#10;- modification du docstring fonction main()">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demineur.py" beforeDir="false" afterPath="$PROJECT_DIR$/demineur.py" afterDir="false" />
     </list>
@@ -109,7 +109,21 @@
       <option name="project" value="LOCAL" />
       <updated>1671039683051</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="finition du jeux:&#10;- ajout de la fonction init_game&#10;- ajout de la fonction main&#10;modification de quelque commentaires&#10;ajout du matricule dans docstring">
+      <created>1671307942557</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671307942557</updated>
+    </task>
+    <task id="LOCAL-00008" summary="jeu fini totalement:&#10;- modification du docstring fonction main()">
+      <created>1671308011146</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671308011146</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -119,6 +133,8 @@
     <MESSAGE value="ajout du return a la fonction get_neighbors&#10;mise en place de la fonction place_mines: qui place les mines dans le tableau de référence&#10;mise en place de la fonction fill_in_board: qui calcule le nombre de mines dans le voisinage d'une case et qui remplie le tableau de référence avec ces nombres" />
     <MESSAGE value="modification des commentaires&#10;modification des docstrings &#10;ajout et finition de la fonction propagate_click" />
     <MESSAGE value="ajout et finition de la fonction parse_input&#10;ajout et finition de la fonction check_win" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout et finition de la fonction parse_input&#10;ajout et finition de la fonction check_win" />
+    <MESSAGE value="finition du jeux:&#10;- ajout de la fonction init_game&#10;- ajout de la fonction main&#10;modification de quelque commentaires&#10;ajout du matricule dans docstring" />
+    <MESSAGE value="jeu fini totalement:&#10;- modification du docstring fonction main()" />
+    <option name="LAST_COMMIT_MESSAGE" value="jeu fini totalement:&#10;- modification du docstring fonction main()" />
   </component>
 </project>

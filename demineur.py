@@ -262,13 +262,13 @@ def parse_input(n: int, m: int):
     """
     # Demande au joueur l'action qu'il veut faire
     possibilite = ["c", "f", "F", "C"]
-    ch_de_car = input("Donner moi l'action que vous voulez faire suivit de la case (ex :f pos_x pos_y) :")
+    ch_de_car = input("Donner moi l'action que vous voulez faire suivit de la case:")
 
     action = ch_de_car.split(" ")  # transformer la réponse en liste de str
     while len(action) != 3 or not(0 <= int(action[2]) < n) or not(0 <= int(action[1]) < m) or not(action[0] in possibilite):  # Tant
         # que le nombre d'arg est faux, que l'indice donné est out of range ou que l'action est fausse on redemande
         print("veuillez réessayer, l'indice de la case donnée est out of range")
-        ch_de_car = input("Donner moi l'action que vous voulez faire suivit de la case (ex :f 0 4) :")
+        ch_de_car = input("Donner moi l'action que vous voulez faire suivit de la case:")
         action = ch_de_car.split(" ")
 
     for i in range(1, 3):  # Transformer les éléments(str) contenant les coordonnées en int
@@ -304,14 +304,32 @@ def check_win(game_board: list, reference_board: list, mines_list: list, total_f
     else:
         case_inconnue = 0  # Nombre de cases non dévoilées
         for lignes in game_board:  # Pour chaque ligne,
-            for colonne in lignes:  # Chaque case
-                if colonne == "." or colonne == "F":  # Si non dévoilée
+            for case in lignes:  # Chaque case
+                if case == "." or case == "F":  # Si non dévoilée
                     case_inconnue += 1  # On l'ajoute au nombre de cases non dévoilées
 
         if case_inconnue == nb_mines:  # S'il y a autant de mines que de cases non dévoilées
             game_status = True  # La condition de victoire est remplie
     return game_status
 
+def game_intro():
+    """
+    Foncotion qui appelle l'intro au jeux
+
+            Parametres:
+                    None
+
+            Return:
+                    None
+    """
+    print("---------------------------------------------------------\n"
+          "Bienvenue sur le demineur en terminal.\n"
+          "\n"
+          "Pour faire une action faut preciser ce que vous voulez faire suivie des cases:\n"
+          "Comme suite -> :action coordonee_colonne coordonee_ligne\n"
+          "Les differents actions possible:\n"
+          "C -> Click sur la case       F -> Poser un drapeau\n"
+          "=> exemple pour ajouter un drapeau a la case (2,5) ':F 2 5'\n")
 
 def init_game(n: int, m: int, number_of_mines: int):
     """
@@ -354,16 +372,19 @@ def main():
     permet au joueur de rentrer chaque nouvelle action afin de faire avancer le jeu
 
             Parameters:
-                    none
+                    None
 
             Return:
                     ress (int): gives if game won or lost
     """
     ress = "pas de rep"  # Donne si le jeu est gagné
     m = int(sys.argv[1])  # Nombre de cases en largeur du plateau
-    n = int(sys.argv[2])  # Nombre de cases en longueur du plateau
+    n = int(sys.argv[2])  # Nombre de cases en longueur du
     number_of_mines = int(sys.argv[3])  # Nombre de mines dans le plateau
+    if not number_of_mines:
+        raise ValueError("Vous devez ajouter au moins 1 mine")
 
+    game_intro()
     game_param = init_game(n, m, number_of_mines)  # Renvoi le game_board, le reference_board et la mines_list
 
     nb_flags = 0
@@ -397,15 +418,21 @@ def main():
         if check_win(game_param[0], game_param[1], game_param[2], nb_flags):  # Si la condition de victoire est remplie
             ress = 1  # Le jeu est gagné
             game_continue = False  # Le jeu est arrêté
-            print("Vous avez trouvez toute les mines bien jouer")
+            print("\n"
+                  "Vous avez trouvez toute les mines bien jouer")
             print("         ||                 ||")
-            print("")
+            print()
             print("       __                     __")
             print("         __                 __")
-            print("           -----------------")
+            print("           -----------------\n")
 
     return ress
 
 
 if __name__ == "__main__":  # Permet d'importer la fonction dans d'autres fichiers sans anomalies
-    main()
+    if __name__ == "__main__":
+        try:
+            main()
+        except ValueError as e:
+            print("Error:", e)
+            exit()

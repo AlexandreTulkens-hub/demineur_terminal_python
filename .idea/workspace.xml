@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e56ecae9-e98c-4d03-b8d3-f3133fa33604" name="Changes" comment="jeu fini totalement:&#10;- modification du docstring fonction main()">
+    <list default="true" id="e56ecae9-e98c-4d03-b8d3-f3133fa33604" name="Changes" comment="rendre le prompt plus jolie pour Code + error handling dans main()">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demineur.py" beforeDir="false" afterPath="$PROJECT_DIR$/demineur.py" afterDir="false" />
     </list>
@@ -123,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671308011146</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="rendre le prompt plus jolie pour Code + error handling dans main()">
+      <created>1709299848844</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1709299848844</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -135,6 +142,7 @@
     <MESSAGE value="ajout et finition de la fonction parse_input&#10;ajout et finition de la fonction check_win" />
     <MESSAGE value="finition du jeux:&#10;- ajout de la fonction init_game&#10;- ajout de la fonction main&#10;modification de quelque commentaires&#10;ajout du matricule dans docstring" />
     <MESSAGE value="jeu fini totalement:&#10;- modification du docstring fonction main()" />
-    <option name="LAST_COMMIT_MESSAGE" value="jeu fini totalement:&#10;- modification du docstring fonction main()" />
+    <MESSAGE value="rendre le prompt plus jolie pour Code + error handling dans main()" />
+    <option name="LAST_COMMIT_MESSAGE" value="rendre le prompt plus jolie pour Code + error handling dans main()" />
   </component>
 </project>

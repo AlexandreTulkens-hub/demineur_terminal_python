@@ -430,9 +430,8 @@ def main():
 
 
 if __name__ == "__main__":  # Permet d'importer la fonction dans d'autres fichiers sans anomalies
-    if __name__ == "__main__":
-        try:
-            main()
-        except ValueError as e:
-            print("Error:", e)
-            exit()
+    try:
+        main()
+    except ValueError as e:
+        print("Error:", e)
+        exit()
